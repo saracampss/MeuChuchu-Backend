@@ -1,12 +1,38 @@
 version: '3'
 
 services:
-
   api:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    build: ./api
+    command: python manage.py run -h 0.0.0.0
+    depends_on: 
+      - db
     volumes:
-      - ".:/meuchuchu/"
+      - ./api/:/usr/src/app/
     ports:
-      - 5002:5002
+      - "5002:5002"
+    env_file:
+      - ./.env.dev
+    restart: always
+    networks:
+      - meu_chuchu
+  
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=hello_flask
+      - POSTGRES_PASSWORD=hello_flask
+      - POSTGRES_DB=hello_flask_dev
+    ports:
+      - "5433:5433"
+    restart: always
+    networks:
+      - meu_chuchu
+
+volumes:
+  postgres_data:
+
+networks:
+    meu_chuchu:
+      driver: bridge
