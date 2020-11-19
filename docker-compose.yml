@@ -24,8 +24,6 @@ services:
       - POSTGRES_USER=hello_flask
       - POSTGRES_PASSWORD=hello_flask
       - POSTGRES_DB=hello_flask_dev
-    ports:
-      - "5433:5433"
     restart: always
     networks:
       - meu_chuchu
