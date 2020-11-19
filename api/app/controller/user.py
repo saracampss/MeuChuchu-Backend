@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify, current_app
 from app.model.tables import User
 from app.schemas.serealizer import UserSchema
 
-
 bp_user = Blueprint('user', __name__)
 @bp_user.route('/mostrar', methods=['GET'])
 def mostrar():

@@ -9,7 +9,7 @@ def configure(app):
     ma.init_app(app)
 
 
-class UserSchema(ModelSchema):
+class UserSchema(ma.ModelSchema):
     class Meta:
         model = User
         load_only = ("password",)
