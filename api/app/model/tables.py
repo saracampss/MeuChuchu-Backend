@@ -23,6 +23,7 @@ class Banca(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     category = db.Column(db.ARRAY(db.String), nullable=False)
+    endereco = db.Column(db.String, nullable=False)
     regadm = db.Column(db.String(50), nullable=False)
     
     #Contatos
