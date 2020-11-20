@@ -18,6 +18,9 @@ config_ma(app)
 from app.controller.user import bp_user
 app.register_blueprint(bp_user)
 
+from app.controller.banca import bp_banca
+app.register_blueprint(bp_banca)
+
 
 #class User(db.Model):
 #    __tablename__ = "users"
