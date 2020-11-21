@@ -12,12 +12,7 @@ def mostrar():
 def register():
     us = UserSchema()
 
-    user, error = us.load(request.json)
-
-    if error:
-        return jsonify(error), 401
-
-    user.gen_hash()
+    user = us.load(request.json)
 
     current_app.db.session.add(user)
     current_app.db.session.commit()
