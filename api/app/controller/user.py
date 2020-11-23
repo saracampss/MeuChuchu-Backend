@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
+from flask_login import login_user
 from app.model.tables import User
 from app.schemas.serealizer import UserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -11,9 +12,8 @@ def register():
 
     user = us.load(request.json)
 
-    pw_hash = generate_password_hash( user.password.encode('utf-8'), method='pbkdf2:sha512' , salt_length = 8)
-    user.password = pw_hash
-
+   # pw_hash = generate_password_hash( user.password.encode('utf-8'), method='pbkdf2:sha512' , salt_length = 8)
+   # user.password = pw_hash
 
     current_app.db.session.add(user)
     current_app.db.session.commit()
@@ -38,3 +38,16 @@ def deletar(identificador):
     User.query.filter(User.id == identificador).delete()
     current_app.db.session.commit()
     return jsonify('Deletado!!!')
+
+@bp_user.route('/login', methods=["POST", "GET"])
+def login():
+        us = UserSchema()
+        user = us.load(request.json)
+        users = User.query.filter_by(email = user.email).first()
+        print("########", users)
+        if users and users.password == user.password:
+            login_user(users)
+            print("#######", login_user(users))
+            return jsonify("Login efetuado com sucesso!")
+        else:
+           return jsonify("Login Invalido!")

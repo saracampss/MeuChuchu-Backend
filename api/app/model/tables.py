@@ -17,3 +17,19 @@ class User(db.Model):
     tipo_de_user = db.Column(db.Boolean, nullable=False)
     image = db.Column(db.String, nullable=False)
 
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
+
+

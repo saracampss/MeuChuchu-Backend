@@ -17,6 +17,7 @@ class UserSchema(ma.ModelSchema):
 
     name = fields.Str(required=True)
     email = fields.Email(required=True)
+    password = fields.Str(required=True)
     celular = fields.Str(required=True)
     tipo_de_user = fields.Bool(required=True)
     image = fields.Str(required=True)
