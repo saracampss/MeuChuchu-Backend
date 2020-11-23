@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, current_app
-from flask_login import login_user
+from flask_login import login_user, login_required, logout_user
 from app.model.tables import User
 from app.schemas.serealizer import UserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -44,10 +44,16 @@ def login():
         us = UserSchema()
         user = us.load(request.json)
         users = User.query.filter_by(email = user.email).first()
-        print("########", users)
         if users and users.password == user.password:
             login_user(users)
-            print("#######", login_user(users))
             return jsonify("Login efetuado com sucesso!")
         else:
            return jsonify("Login Invalido!")
+
+
+@bp_user.route("/logout")
+#@login_required
+def logout():
+    logout_user()
+    #return redirect(somewhere)
+    return jsonify ("logout efetuado com sucesso!"), 201
