@@ -1,16 +1,32 @@
+import os
 from flask import Blueprint, request, jsonify, current_app
+from marshmallow.exceptions import ValidationError
 from flask_login import login_user, login_required, logout_user
 from app.model.tables import User
 from app.schemas.serealizer import UserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
+from email_validator import validate_email
 
 bp_user = Blueprint('user', __name__)
 
 @bp_user.route('/create-user', methods=['POST'])
 def register():
-    us = UserSchema()
+    try:
+        us = UserSchema()
+        user = us.load(request.json)
+    except ValidationError as err:
+        return err.messages, 400
 
-    user = us.load(request.json)
+    try:
+        validate_email(user.email)
+    except:
+        return jsonify ("Invalid_email"), 400
+
+    users = User.query.filter_by(email=user.email).first()
+    if users and users.email == user.email:
+
+        return jsonify("User_alredy_exists"), 400
+
 
    # pw_hash = generate_password_hash( user.password.encode('utf-8'), method='pbkdf2:sha512' , salt_length = 8)
    # user.password = pw_hash
