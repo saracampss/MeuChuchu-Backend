@@ -15,16 +15,9 @@ class UserSchema(ma.ModelSchema):
         load_only = ("password",)
         dump_only = ("id")
 
-    name = fields.Str(required=True)
+    name = fields.Str(required=False)
     email = fields.Email(required=True)
-    celular = fields.Str(required=True)
-    tipo_de_user = fields.Bool(required=True)
-
-"""
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(320), nullable=False)
-    password = db.Column(db.String(20), nullable=False)
-    celular = db.Column(db.String(11), nullable=False) 
-    tipo_de_user = db.Column(db.Boolean, nullable=False)
-"""
+    password = fields.Str(required=True)
+    celular = fields.Str(required=False)
+    tipo_de_user = fields.Bool(required=False)
+    image = fields.Str(required=False)
