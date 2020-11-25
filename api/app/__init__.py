@@ -25,6 +25,9 @@ login_manager.init_app(app)
 from app.controller.user import bp_user
 app.register_blueprint(bp_user)
 
+from app.controller.banca import bp_banca
+app.register_blueprint(bp_banca)
+
 
 @app.route("/")
 def index():
