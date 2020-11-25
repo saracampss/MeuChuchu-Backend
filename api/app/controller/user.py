@@ -22,8 +22,8 @@ def register():
     except:
         return jsonify ("Invalid_email"), 400
 
-    users = User.query.filter_by(email=user.email).first()
-    if users and users.email == user.email:
+    user = User.query.filter_by(email=user.email).first()
+    if user and user.email == user.email:
 
         return jsonify("User_alredy_exists"), 400
 
@@ -57,14 +57,26 @@ def deletar(identificador):
 
 @bp_user.route('/login', methods=["POST", "GET"])
 def login():
-        us = UserSchema()
-        user = us.load(request.json)
+        try:
+            us = UserSchema()
+            user = us.load(request.json)
+        except ValidationError as err:
+                return err.messages, 400
+
         users = User.query.filter_by(email = user.email).first()
+
         if users and users.password == user.password:
             login_user(users)
-            return jsonify("Login efetuado com sucesso!")
-        else:
-           return jsonify("Login Invalido!")
+            return jsonify("Logged_in"), 200
+        if not user:
+            return {"message:" "Missing_data"}, 400
+
+        if not users:
+            return {"message": "User_missing"}, 404
+            
+        if not users.password == user.password:
+            return {"message": "Wrong_password"}, 403
+            
 
 
 @bp_user.route("/logout")
