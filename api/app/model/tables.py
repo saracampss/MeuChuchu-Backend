@@ -49,5 +49,16 @@ class Banca(db.Model):
     facebook = db.Column(db.String, nullable=True)
     website = db.Column(db.String, nullable=True)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user  = db.relationship('User', foreign_keys = user_id)
+    #user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    #user  = db.relationship('User', foreign_keys = user_id)
+
+class Produto(db.Model):
+    __tablename__ = "produtos"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    preco = db.Column(db.Float, nullable=True)
+    descricao = db.Column(db.String, nullable=True)
+
+    #banca_id = db.Column(db.Integer, db.ForeignKey('bancas.id'))
+    #banca = db.relationship('Banca', foreign_keys = banca_id)

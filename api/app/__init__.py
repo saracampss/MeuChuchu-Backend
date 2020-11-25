@@ -28,6 +28,9 @@ app.register_blueprint(bp_user)
 from app.controller.banca import bp_banca
 app.register_blueprint(bp_banca)
 
+from app.controller.produto import bp_produto
+app.register_blueprint(bp_produto)
+
 
 @app.route("/")
 def index():

@@ -22,8 +22,8 @@ def register():
     except:
         return jsonify ("Invalid_email"), 400
 
-    user = User.query.filter_by(email=user.email).first()
-    if user and user.email == user.email:
+    users = User.query.filter_by(email=user.email).first()
+    if users and users.email == user.email:
 
         return jsonify("User_alredy_exists"), 400
 

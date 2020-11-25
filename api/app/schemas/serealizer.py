@@ -1,7 +1,7 @@
 from marshmallow import fields, validates, ValidationError
 from flask_marshmallow import Marshmallow
 from marshmallow_sqlalchemy import ModelSchema
-from app.model.tables import User, Banca 
+from app.model.tables import User, Banca, Produto
 
 ma = Marshmallow()
 
@@ -37,3 +37,13 @@ class BancaSchema(ma.ModelSchema):
     instagram = fields.Str(required=False)
     facebook = fields.Str(required=False)
     website = fields.Str(required=False)
+
+class ProdutoSchema(ma.ModelSchema):
+    class Meta:
+        model = Produto
+        dump_only = ("id")
+
+    name = fields.Str(required=True)
+    preco = fields.Float(required=False)
+    descricao = fields.Str(required=False)
+    banca_id = fields.Int(required=True)
