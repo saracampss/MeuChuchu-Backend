@@ -9,16 +9,7 @@ def configure(app):
     ma.init_app(app)
 
 
-class UserSchema(ma.ModelSchema):
-    class Meta:
-        model = User
-        load_only = ("password",)
-        dump_only = ("id")
 
-    name = fields.Str(required=True)
-    email = fields.Email(required=True)
-    celular = fields.Str(required=True)
-    tipo_de_user = fields.Bool(required=True)
 
 class BancaSchema(ma.ModelSchema):
     class Meta:
