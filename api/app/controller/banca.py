@@ -24,7 +24,7 @@ def cadastrar():
 def mostrar_banca(identificador):
     query = Banca.query.filter(Banca.id == identificador)
 
-    return BancaSchema(many=False).jsonify(query.first()), 200
+    return BancaSchema(many=True).jsonify(query), 200
 
 @bp_banca.route('/mostrar_bancas', methods=['GET'])
 def mostrar():
