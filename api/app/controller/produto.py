@@ -20,9 +20,9 @@ def mostrar():
 
 @bp_produto.route('/mostrar_produto/<identificador>', methods=['GET'])
 def mostrar_produto(identificador):
-    query = Produto.query.filter(Produto.id == identificador)
+    query = Produto.query.filter(Produto.banca_id == identificador)
 
-    return ProdutoSchema(many=False).jsonify(query.first()), 200
+    return ProdutoSchema(many=True).jsonify(query), 200
 
 @bp_produto.route('/modificar_produto/<identificador>', methods=['POST'])
 def modificar(identificador):
