@@ -4,12 +4,14 @@ from flask_migrate import Migrate, MigrateCommand
 from app.model.tables import configure as config_db
 from app.schemas.serealizer import configure as config_ma
 
+
 app = Flask(__name__)
 
 app.config.from_object("app.config.Config")
 
 from app.model.tables import db
 migrate = Migrate(app,db)
+migrate = Migrate(compare_type=True)
 
 
 config_db(app)
