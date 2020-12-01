@@ -19,6 +19,7 @@ class UserSchema(ma.ModelSchema):
     email = fields.Email(required=True)
     celular = fields.Str(required=True)
     tipo_de_user = fields.Bool(required=True)
+    image = fields.Str(required=True)
 
 class BancaSchema(ma.ModelSchema):
     class Meta:
@@ -29,7 +30,8 @@ class BancaSchema(ma.ModelSchema):
     category = fields.List(fields.Str, required=True)
     user_id = fields.Int(required=True)
     endereco = fields.Str(required=True)
-    
+    image = fields.Str(required=True)
+
     email = fields.Str(required=True)
     celular = fields.Str(required=True)
     instagram = fields.Str(required=True)
@@ -45,3 +47,4 @@ class ProdutoSchema(ma.ModelSchema):
     preco = fields.Float(required=False)
     descricao = fields.Str(required=False)
     banca_id = fields.Int(required=True)
+    image = fields.Str(required=True)
