@@ -30,13 +30,13 @@ class BancaSchema(ma.ModelSchema):
     category = fields.List(fields.Str, required=True)
     user_id = fields.Int(required=True)
     endereco = fields.Str(required=True)
-    image = fields.Str(required=True)
 
     email = fields.Str(required=True)
     celular = fields.Str(required=True)
     instagram = fields.Str(required=True)
     facebook = fields.Str(required=True)
     website = fields.Str(required=True)
+    image = fields.Str(required=True)
 
 class ProdutoSchema(ma.ModelSchema):
     class Meta:
