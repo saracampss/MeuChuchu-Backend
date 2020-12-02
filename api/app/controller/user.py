@@ -84,4 +84,8 @@ def login():
 def logout():
     logout_user()
     #return redirect(somewhere)
+<<<<<<< HEAD
     return jsonify ("logout efetuado com sucesso!"), 201
+=======
+    return jsonify ("logout efetuado com sucesso!"), 201
+>>>>>>> 44e6f405dc1114bae5de3b82a230195ec099785e
