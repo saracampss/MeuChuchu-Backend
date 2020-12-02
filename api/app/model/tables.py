@@ -16,7 +16,7 @@ class User(db.Model):
     password = db.Column(db.String(20), nullable=False)
     celular = db.Column(db.String(11), nullable=False) 
     tipo_de_user = db.Column(db.Boolean, nullable=False)
-    image = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String(60000), nullable=True)
 
 class Banca(db.Model):
     __tablename__ = "bancas"
@@ -33,7 +33,7 @@ class Banca(db.Model):
     instagram = db.Column(db.String, nullable=True) 
     facebook = db.Column(db.String, nullable=True)
     website = db.Column(db.String, nullable=True)
-    image = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String(60000), nullable=True)
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user  = db.relationship('User', foreign_keys = user_id)
@@ -45,7 +45,7 @@ class Produto(db.Model):
     name = db.Column(db.String(255), nullable=False)
     preco = db.Column(db.Float, nullable=True)
     descricao = db.Column(db.String, nullable=True)
-    image = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String(60000), nullable=True)
 
     banca_id = db.Column(db.Integer, db.ForeignKey('bancas.id'))
     banca = db.relationship('Banca', foreign_keys = banca_id)

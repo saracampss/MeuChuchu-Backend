@@ -1,4 +1,4 @@
-from marshmallow import fields, validates, ValidationError
+from marshmallow import fields
 from flask_marshmallow import Marshmallow
 from marshmallow_sqlalchemy import ModelSchema
 from app.model.tables import User, Banca, Produto

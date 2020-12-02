@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 
 cli = FlaskGroup(app)
 
-# engine = create_engine('postgresql://hello_flask:hello_flask@db:5432/hello_flask_dev')
+engine = create_engine('postgresql://hello_flask:hello_flask@db:5432/hello_flask_dev')
 
 @cli.command("create_db")
 def create_db():
@@ -27,7 +27,7 @@ def seed_db():
 # users = "users"
 # produtos = "produtos"
 
-# column = db.Column('image', db.String, primary_key=False)
+# column = db.Column('image', db.Text, primary_key=False)
 # add_column(engine, produtos, column)
 # add_column(engine, bancas, column)
 # add_column(engine, users, column)
