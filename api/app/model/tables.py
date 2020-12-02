@@ -13,10 +13,25 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(320), nullable=False)
-    password = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(225), nullable=False)
     celular = db.Column(db.String(11), nullable=False) 
     tipo_de_user = db.Column(db.Boolean, nullable=False)
-    image = db.Column(db.String(60000), nullable=True)
+    image = db.Column(db.String, nullable=False)
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
 
 class Banca(db.Model):
     __tablename__ = "bancas"
@@ -26,14 +41,13 @@ class Banca(db.Model):
     category = db.Column(db.ARRAY(db.String), nullable=False)
     endereco = db.Column(db.String, nullable=False)
     regadm = db.Column(db.String(50), nullable=False)
-
+    
     #Contatos
     email = db.Column(db.String(320), nullable=True, unique=True)
     celular = db.Column(db.String(11), nullable=True) 
     instagram = db.Column(db.String, nullable=True) 
     facebook = db.Column(db.String, nullable=True)
     website = db.Column(db.String, nullable=True)
-    image = db.Column(db.String(60000), nullable=True)
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user  = db.relationship('User', foreign_keys = user_id)
@@ -45,7 +59,6 @@ class Produto(db.Model):
     name = db.Column(db.String(255), nullable=False)
     preco = db.Column(db.Float, nullable=True)
     descricao = db.Column(db.String, nullable=True)
-    image = db.Column(db.String(60000), nullable=True)
 
     banca_id = db.Column(db.Integer, db.ForeignKey('bancas.id'))
     banca = db.relationship('Banca', foreign_keys = banca_id)

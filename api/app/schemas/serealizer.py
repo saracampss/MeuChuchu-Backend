@@ -15,11 +15,12 @@ class UserSchema(ma.ModelSchema):
         load_only = ("password",)
         dump_only = ("id")
 
-    name = fields.Str(required=True)
+    name = fields.Str(required=False)
     email = fields.Email(required=True)
-    celular = fields.Str(required=True)
-    tipo_de_user = fields.Bool(required=True)
-    image = fields.Str(required=True)
+    password = fields.Str(required=True)
+    celular = fields.Str(required=False)
+    tipo_de_user = fields.Bool(required=False)
+    image = fields.Str(required=False)
 
 class BancaSchema(ma.ModelSchema):
     class Meta:

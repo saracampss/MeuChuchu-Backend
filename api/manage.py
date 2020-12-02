@@ -18,19 +18,18 @@ def seed_db():
     db.session.add(User(name="giovana", email="giovana@email.com", password='sara1234', celular="999999999", tipo_de_user=True))
     db.session.commit()
     
-# def add_column(engine, table_name, column):
-#     column_name = column.compile(dialect=engine.dialect)
-#     column_type = column.type.compile(engine.dialect)
-#     engine.execute('ALTER TABLE %s ADD COLUMN %s %s' % (table_name, column_name, column_type))
-
+def add_column(engine, table_name, column):
+   column_name = column.compile(dialect=engine.dialect)
+   column_type = column.type.compile(engine.dialect)
+   engine.execute('ALTER TABLE %s ADD COLUMN %s %s' % (table_name, column_name, column_type))
 # bancas = "bancas"
-# users = "users"
+#users = "users"
 # produtos = "produtos"
 
-# column = db.Column('image', db.Text, primary_key=False)
-# add_column(engine, produtos, column)
-# add_column(engine, bancas, column)
-# add_column(engine, users, column)
+#column = db.Column('image', db.Text, primary_key=False)
+ #add_column(engine, produtos, column)
+#add_column(engine, bancas, column)
+#add_column(engine, users, column)
 
 if __name__ == "__main__":
     cli()
