@@ -15,10 +15,12 @@ class UserSchema(ma.ModelSchema):
         load_only = ("password",)
         dump_only = ("id")
 
-    name = fields.Str(required=True)
+    name = fields.Str(required=False)
     email = fields.Email(required=True)
-    celular = fields.Str(required=True)
-    tipo_de_user = fields.Bool(required=True)
+    password = fields.Str(required=True)
+    celular = fields.Str(required=False)
+    tipo_de_user = fields.Bool(required=False)
+    image = fields.Str(required=False)
 
 class BancaSchema(ma.ModelSchema):
     class Meta:
@@ -30,11 +32,11 @@ class BancaSchema(ma.ModelSchema):
     user_id = fields.Int(required=True)
     endereco = fields.Str(required=True)
     
-    email = fields.Str(required=True)
-    celular = fields.Str(required=True)
-    instagram = fields.Str(required=True)
-    facebook = fields.Str(required=True)
-    website = fields.Str(required=True)
+    email = fields.Str(required=False)
+    celular = fields.Str(required=False)
+    instagram = fields.Str(required=False)
+    facebook = fields.Str(required=False)
+    website = fields.Str(required=False)
 
 class ProdutoSchema(ma.ModelSchema):
     class Meta:
