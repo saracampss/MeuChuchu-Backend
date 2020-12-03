@@ -20,6 +20,12 @@ def cadastrar():
     current_app.db.session.commit()
     return bs.jsonify(banca), 201
 
+@bp_banca.route('/mostrar_banca/<identificador>', methods=['GET'])
+def mostrar_banca(identificador):
+    query = Banca.query.filter(Banca.id == identificador)
+
+    return BancaSchema(many=True).jsonify(query), 200
+
 @bp_banca.route('/mostrar_bancas', methods=['GET'])
 def mostrar():
     result = Banca.query.all()
