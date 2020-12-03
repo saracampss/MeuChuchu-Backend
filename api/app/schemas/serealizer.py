@@ -1,4 +1,4 @@
-from marshmallow import fields, validates, ValidationError
+from marshmallow import fields
 from flask_marshmallow import Marshmallow
 from marshmallow_sqlalchemy import ModelSchema
 from app.model.tables import User, Banca, Produto
@@ -31,12 +31,13 @@ class BancaSchema(ma.ModelSchema):
     category = fields.List(fields.Str, required=True)
     user_id = fields.Int(required=True)
     endereco = fields.Str(required=True)
-    
-    email = fields.Str(required=False)
-    celular = fields.Str(required=False)
-    instagram = fields.Str(required=False)
-    facebook = fields.Str(required=False)
-    website = fields.Str(required=False)
+
+    email = fields.Str(required=True)
+    celular = fields.Str(required=True)
+    instagram = fields.Str(required=True)
+    facebook = fields.Str(required=True)
+    website = fields.Str(required=True)
+    image = fields.Str(required=True)
 
 class ProdutoSchema(ma.ModelSchema):
     class Meta:
@@ -47,3 +48,4 @@ class ProdutoSchema(ma.ModelSchema):
     preco = fields.Float(required=False)
     descricao = fields.Str(required=False)
     banca_id = fields.Int(required=True)
+    image = fields.Str(required=True)
