@@ -43,7 +43,7 @@ class Banca(db.Model):
     regadm = db.Column(db.String(50), nullable=False)
     
     #Contatos
-    email = db.Column(db.String(320), nullable=True, unique=True)
+    email = db.Column(db.String(60), nullable=True, unique=True)
     celular = db.Column(db.String(11), nullable=True) 
     instagram = db.Column(db.String, nullable=True) 
     facebook = db.Column(db.String, nullable=True)

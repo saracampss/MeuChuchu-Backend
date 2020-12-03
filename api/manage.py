@@ -10,6 +10,7 @@ engine = create_engine('postgresql://hello_flask:hello_flask@db:5432/hello_flask
 
 @cli.command("create_db")
 def create_db():
+    #db.drop_all()
     db.create_all()
     db.session.commit()
 

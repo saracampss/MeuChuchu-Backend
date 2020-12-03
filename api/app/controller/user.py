@@ -8,7 +8,6 @@ from app.schemas.serealizer import UserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
 from email_validator import validate_email
 
-
 bp_user = Blueprint('user', __name__)
 
 @bp_user.route('/create_user', methods=['POST'])
@@ -57,7 +56,7 @@ def deletar(identificador):
     current_app.db.session.commit()
     return jsonify('Deletado!!!')
 
-
+ 
 @bp_user.route('/login', methods=["POST"])
 def login():
 
@@ -76,12 +75,9 @@ def login():
         return {"message": "Wrong_password"}, 403
 
 
-
 @bp_user.route("/logout")
 #@login_required
 def logout():
     logout_user()
     #return redirect(somewhere)
-
     return jsonify ("logout efetuado com sucesso!"), 201
-
