@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Blueprint, request, jsonify, current_app
 from marshmallow.exceptions import ValidationError
 from flask_login import login_user, login_required, logout_user
@@ -6,6 +7,7 @@ from app.model.tables import User
 from app.schemas.serealizer import UserSchema
 from werkzeug.security import generate_password_hash, check_password_hash
 from email_validator import validate_email
+
 
 bp_user = Blueprint('user', __name__)
 
@@ -55,28 +57,24 @@ def deletar(identificador):
     current_app.db.session.commit()
     return jsonify('Deletado!!!')
 
-@bp_user.route('/login', methods=["POST", "GET"])
+
+@bp_user.route('/login', methods=["POST"])
 def login():
-        try:
-            us = UserSchema()
-            user = us.load(request.json)
-        except ValidationError as err:
-                return err.messages, 400
 
-        users = User.query.filter_by(email = user.email).first()
+    request_body = request.json
 
-        if users and users.password == user.password:
-            login_user(users)
-            return jsonify("Logged_in"), 200
-        if not user:
-            return {"message:" "Missing_data"}, 400
+    users = User.query.filter_by(email=request_body['email']).first()
 
-        if not users:
-            return {"message": "User_missing"}, 404
-            
-        if not users.password == user.password:
-            return {"message": "Wrong_password"}, 403
-            
+    if users and users.password == request_body['password']:
+        
+        login_user(users)
+        return jsonify({"status": "Logged_in", "user_id": users.id}), 200
+    if not users:
+        return {"message": "User_missing"}, 404
+
+    if not users.password == request_body['password']:
+        return {"message": "Wrong_password"}, 403
+
 
 
 @bp_user.route("/logout")
@@ -84,8 +82,6 @@ def login():
 def logout():
     logout_user()
     #return redirect(somewhere)
-<<<<<<< HEAD
+
     return jsonify ("logout efetuado com sucesso!"), 201
-=======
-    return jsonify ("logout efetuado com sucesso!"), 201
->>>>>>> 44e6f405dc1114bae5de3b82a230195ec099785e
+
